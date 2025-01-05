@@ -1,30 +1,43 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import BasicLayout from '@/layouts/BasicLayout.vue';
+import Thumbnail from '@/view/thumbnail/ThumbnailPage.vue';
+import { computed } from 'vue';
+import MarkupPage from '@/view/MarkupView/MarkupPage.vue';
+
+const route = useRoute();
+
+const showBasicLayout = computed(() => !(route.path.startsWith('/user') || route.path === '/' || route.path === '/markup'));
+
+const showThumbnail = computed(() => route.path === '/');
+const showMarkupPage = computed(() => route.path === '/markup');
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div id="AppVue">
+    <template v-if="showBasicLayout">
+      <BasicLayout>
+        <router-view />
+      </BasicLayout>
+    </template>
+    <template v-else-if="showThumbnail">
+      <Thumbnail />
+    </template>
+    <template v-else-if="showMarkupPage">
+      <MarkupPage />
+    </template>
+    <template v-else>
+      <router-view />
+    </template>
+  </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+#AppVue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

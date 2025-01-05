@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+      <link rel="manifest" href="/site.webmanifest">
+    <title>CalIt</title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+  <noscript>
+      <h2>🤔 뭔가 잘못된 것 같아요!</h2>
+      <p>CalIt을 제대로 사용하려면 JavaScript가 필요합니다.</p>
+      <p>JavaScript를 켜주시면, 저희도 열심히 일할게요! 😄</p>
+      <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener">JavaScript 켜기</a>
+  </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
