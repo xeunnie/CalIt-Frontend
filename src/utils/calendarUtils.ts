@@ -9,12 +9,12 @@ const useCalendar = () => {
 
   // 해당 월의 총 일 수 계산
   const daysInMonth = computed<number>(
-    () => getDaysInMonthUtil(new Date(currentYear.value, currentMonth.value))
+    () => getDaysInMonthUtil(new Date(currentYear.value, currentMonth.value)),
   );
 
   // 해당 월의 시작 요일 계산 (빈칸 수)
   const startBlankDays = computed<number>(
-    () => startOfMonthUtil(new Date(currentYear.value, currentMonth.value)).getDay()
+    () => startOfMonthUtil(new Date(currentYear.value, currentMonth.value)).getDay(),
   );
 
   // 오늘로 이동
