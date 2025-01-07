@@ -3,23 +3,28 @@ import { getDaysInMonthUtil, startOfMonthUtil } from '@/utils/scheduleDateFnsUti
 
 const useCalendar = () => {
   const today = new Date();
-  const currentYear = ref(today.getFullYear());
-  const currentMonth = ref(today.getMonth());
-  const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const currentYear = ref<number>(today.getFullYear());
+  const currentMonth = ref<number>(today.getMonth());
+  const weekDays = ref<string[]>(['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']);
 
-  const daysInMonth = computed(
-    () => getDaysInMonthUtil(new Date(currentYear.value, currentMonth.value)),
-  );
-  const startBlankDays = computed(
-    () => startOfMonthUtil(new Date(currentYear.value, currentMonth.value)).getDay(),
+  // 해당 월의 총 일 수 계산
+  const daysInMonth = computed<number>(
+    () => getDaysInMonthUtil(new Date(currentYear.value, currentMonth.value))
   );
 
-  const goToToday = () => {
+  // 해당 월의 시작 요일 계산 (빈칸 수)
+  const startBlankDays = computed<number>(
+    () => startOfMonthUtil(new Date(currentYear.value, currentMonth.value)).getDay()
+  );
+
+  // 오늘로 이동
+  const goToToday = (): void => {
     currentYear.value = today.getFullYear();
     currentMonth.value = today.getMonth();
   };
 
-  const prevMonth = (currentDate) => {
+  // 이전 달 범위 계산
+  const prevMonth = (currentDate: Date): { startDate: Date; endDate: Date } => {
     const date = new Date(currentDate);
     date.setMonth(date.getMonth() - 1);
     return {
@@ -28,7 +33,8 @@ const useCalendar = () => {
     };
   };
 
-  const nextMonth = (currentDate) => {
+  // 다음 달 범위 계산
+  const nextMonth = (currentDate: Date): { startDate: Date; endDate: Date } => {
     const date = new Date(currentDate);
     date.setMonth(date.getMonth() + 1);
     return {
